@@ -1,9 +1,8 @@
-import React from 'react';
+import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../features/modal/modalSlice';
-import { CartItem } from './CartItem';
 
-export const CartContainer = () => {
+const CartContainer = () => {
   const dispatch = useDispatch();
   const { cartItems, total, amount } = useSelector((store) => store.cart);
 
@@ -25,11 +24,7 @@ export const CartContainer = () => {
       </header>
       <div>
         {cartItems.map((item) => {
-          return (
-            <CartItem key={item.id} {...item}>
-              {item.name}
-            </CartItem>
-          );
+          return <CartItem key={item.id} {...item} />;
         })}
       </div>
       <footer>
@@ -46,3 +41,4 @@ export const CartContainer = () => {
     </section>
   );
 };
+export default CartContainer;

@@ -1,9 +1,8 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { decrease, increase, removeItem } from '../features/cart/cartSlice';
 import { ChevronDown, ChevronUp } from '../icons';
+import { removeItem, increase, decrease } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
 
-export const CartItem = ({ id, img, title, price, amount }) => {
+const CartItem = ({ id, img, title, price, amount }) => {
   const dispatch = useDispatch();
   return (
     <article className="cart-item">
@@ -11,7 +10,12 @@ export const CartItem = ({ id, img, title, price, amount }) => {
       <div>
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
-        <button className="remove-btn" onClick={() => dispatch(removeItem(id))}>
+        <button
+          className="remove-btn"
+          onClick={() => {
+            dispatch(removeItem(id));
+          }}
+        >
           remove
         </button>
       </div>
@@ -29,7 +33,7 @@ export const CartItem = ({ id, img, title, price, amount }) => {
           className="amount-btn"
           onClick={() => {
             if (amount === 1) {
-              dispatch(removeItem({ id }));
+              dispatch(removeItem(id));
               return;
             }
             dispatch(decrease({ id }));
@@ -41,3 +45,4 @@ export const CartItem = ({ id, img, title, price, amount }) => {
     </article>
   );
 };
+export default CartItem;
